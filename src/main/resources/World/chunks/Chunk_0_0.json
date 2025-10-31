@@ -1,0 +1,31 @@
+{
+  "chunkX": 0,
+  "chunkY": 0,
+  "layer": 0,
+  "tiles": {
+    "tile_0": {
+      "class": "Background",
+      "x": 0,
+      "y": 0,
+      "internalPath": "main/sprites/TestSprite.png"
+    },
+    "tile_1": {
+      "class": "Background",
+      "x": 1,
+      "y": 0,
+      "internalPath": "main/sprites/TestSprite.png"
+    },
+    "tile_2": {
+      "class": "Background",
+      "x": 1,
+      "y": 1,
+      "internalPath": "main/sprites/TestSprite.png"
+    },
+    "tile_3": {
+      "class": "Background",
+      "x": 0,
+      "y": 1,
+      "internalPath": "main/sprites/TestSprite.png"
+    }
+  }
+}

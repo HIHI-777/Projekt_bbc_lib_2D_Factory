@@ -1,0 +1,43 @@
+package ch.bbcag.benjamin.Factorylibs.help.json;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonValue;
+import com.badlogic.gdx.utils.JsonReader;
+import ch.bbcag.benjamin.Factorylibs.world.main.Chunk;
+import ch.bbcag.benjamin.Factorylibs.world.main.Tile;
+
+public class ChunkLoader {
+
+    public static Chunk loadChunkFromJson(String path) {
+        try {
+            String jsonString = Gdx.files.internal(path).readString();
+            Json json = new Json();
+            JsonValue root = new JsonReader().parse(jsonString);
+
+            int chunkX = root.getInt("chunkX");
+            int chunkY = root.getInt("chunkY");
+            int layer = root.getInt("layer");
+
+            Chunk chunk = new Chunk(chunkX, chunkY, layer);
+
+            JsonValue tilesNode = root.get("tiles");
+            if (tilesNode != null) {
+                for (JsonValue tileEntry = tilesNode.child; tileEntry != null; tileEntry = tileEntry.next) {
+                    String className = tileEntry.getString("class");
+                    int x = tileEntry.getInt("x");
+                    int y = tileEntry.getInt("y");
+                    String internalPath = tileEntry.getString("internalPath");
+
+                    Tile tile = TileFactory.createTile(className, x, y, internalPath);
+                    chunk.addTile(tile);
+                }
+            }
+
+            return chunk;
+
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to load chunk: " + path, e);
+        }
+    }
+}
