@@ -17,9 +17,8 @@ public class ChunkLoader {
 
             int chunkX = root.getInt("chunkX");
             int chunkY = root.getInt("chunkY");
-            int layer = root.getInt("layer");
 
-            Chunk chunk = new Chunk(chunkX, chunkY, layer);
+            Chunk chunk = new Chunk(chunkX, chunkY);
 
             JsonValue tilesNode = root.get("tiles");
             if (tilesNode != null) {

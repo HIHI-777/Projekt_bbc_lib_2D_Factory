@@ -1,62 +1,54 @@
 package ch.bbcag.benjamin.Factorylibs.world.main;
 
-import ch.bbcag.benjamin.Factorylibs.help.json.ChunkLoader;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class World {
-    private List<Chunk> chunks;
+    private List<Layer> layers;
     private Camera mainCamera;
     private SpriteBatch batch;
-    public static final int MAXLAYERS = 16;
 
     public World(SpriteBatch batch) {
         mainCamera = new Camera(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        chunks = new ArrayList<>();
+        layers = getLayers();
         this.batch = batch;
-
-        loadChunksFromFolder("src/main/resources/World/chunks");
     }
 
-    private void loadChunksFromFolder(String folderPath) {
-        FileHandle folder = Gdx.files.internal(folderPath);
+    private List<Layer> getLayers(){
+        layers = new ArrayList<>();
+        File folder = new File("src/main/resources/World/chunks");
 
-        if (!folder.exists() || !folder.isDirectory()) {
-            System.err.println("Chunk folder not found: " + folderPath);
-            return;
-        }
-
-        // Loop through all files in the folder
-        for (FileHandle file : folder.list()) {
-            if (file.extension().equals("json")) {
-                try {
-                    Chunk chunk = ChunkLoader.loadChunkFromJson(file.path());
-                    chunks.add(chunk);
-                } catch (Exception e) {
-                    System.err.println("Failed to load chunk: " + file.name());
-                    e.printStackTrace();
+        if (folder.exists() && folder.isDirectory()) {
+            File[] subDirs = folder.listFiles(File::isDirectory);
+            if (subDirs != null) {
+                Arrays.sort(subDirs, Comparator.comparing(File::getName));
+                for (int i = 0; i < subDirs.length; i++) {
+                    layers.add(new Layer(i));
                 }
+            } else {
+                System.err.println("Could not read folder contents!");
             }
+        } else {
+            System.err.println("Folder not found!");
         }
+        return layers;
     }
 
     public void draw(){
-        for (int i = 0; i < World.MAXLAYERS; i++) {
-            for (Chunk chunk : chunks) {
-                if (chunk.getLayer() == i && chunk.isinsidecamera(mainCamera)) {
-                    chunk.draw(batch, mainCamera);
-                }
-            }
+        for (Layer layer : layers) {
+            layer.draw(batch, mainCamera);
         }
     }
 
     public void dispose() {
-        for (Chunk chunk : chunks) {
-            chunk.dispose();
+        for (Layer layer: layers){
+            layer.dispose();
         }
     }
 

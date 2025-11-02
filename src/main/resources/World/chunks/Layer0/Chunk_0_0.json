@@ -1,7 +1,6 @@
 {
-  "chunkX": -1,
+  "chunkX": 0,
   "chunkY": 0,
-  "layer": 0,
   "tiles": {
     "tile_0": {
       "class": "Background",

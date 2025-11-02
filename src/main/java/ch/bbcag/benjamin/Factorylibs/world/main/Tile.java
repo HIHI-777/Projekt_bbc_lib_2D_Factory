@@ -14,7 +14,7 @@ public abstract class Tile {
     public Tile(int x, int y, String internalPath){
         if (x < 0 || x > 15 || y < 0 || y > 15) {
             throw new IllegalArgumentException(
-                    "Tile coordinates out of range (must be 0–15): x=" + x + ", y=" + y
+                    "Tile coordinates out of range (must be 0-15): x=" + x + ", y=" + y
             );
         }
 
@@ -25,6 +25,29 @@ public abstract class Tile {
 
     public boolean isintheSameSpot(Tile other){
         return this.x == other.getX() && this.y == other.getY();
+    }
+
+    public Tile getLeftTile(Chunk parentchunk, Layer parentLayer){
+        if (this.x != 0) {
+            for (Tile t : parentchunk.getTiles()) {
+                if (t.x == this.x -1 && t.y == this.y) {
+                    return t;
+                }
+            }
+            return null;
+        }else {
+            for (Chunk c : parentLayer.getChunks()){
+                if (c.getChunkX() == parentchunk.getChunkX() -1 && c.getChunkY() == parentchunk.getChunkY() -1){
+                    for (Tile t : c.getTiles()) {
+                        if (t.x == Chunk.WIDTH - 1 && t.y == this.y) {
+                            return t;
+                        }
+                    }
+                    return null;
+                }
+            }
+        }
+        return null;
     }
 
     public int getX() { return x; }

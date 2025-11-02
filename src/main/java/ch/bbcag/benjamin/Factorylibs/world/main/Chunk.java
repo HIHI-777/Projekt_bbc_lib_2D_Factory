@@ -8,7 +8,6 @@ import java.util.List;
 public class Chunk{
     private final int chunkX;
     private final int chunkY;
-    private final int layer;
     private final List<Tile> tiles;
 
     public static final int WIDTH = 16;
@@ -16,10 +15,9 @@ public class Chunk{
     public static final int MAX_TILES = WIDTH * HEIGHT;
 
 
-    public Chunk(int chunkX, int chunkY, int layer) {
+    public Chunk(int chunkX, int chunkY) {
         this.chunkX = chunkX;
         this.chunkY = chunkY;
-        this.layer = layer;
         this.tiles = new ArrayList<>(MAX_TILES);
     }
 
@@ -37,7 +35,7 @@ public class Chunk{
         tiles.add(tile);
     }
 
-
+    public boolean isintheSameSpot(Chunk other){ return this.chunkX == other.getChunkX() && this.chunkY == other.getChunkY(); }
 
     public void draw(SpriteBatch batch, Camera camera){
         for (Tile tile: this.tiles) {
@@ -65,6 +63,5 @@ public class Chunk{
     // Getters
     public int getChunkX() { return chunkX; }
     public int getChunkY() { return chunkY; }
-
-    public int getLayer() { return layer; }
+    public List<Tile> getTiles() { return tiles; }
 }

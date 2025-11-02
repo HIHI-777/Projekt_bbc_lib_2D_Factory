@@ -3,39 +3,27 @@
  */
 package ch.bbcag.benjamin.Factorylibs;
 
+import ch.bbcag.benjamin.Factorylibs.world.main.HandleInput;
 import ch.bbcag.benjamin.Factorylibs.world.main.World;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class MyGame extends ApplicationAdapter {
     private SpriteBatch batch;
     private World world;
-    public static final int CAMERASPEED = 16;
 
     @Override
     public void create() {
         batch = new SpriteBatch();
         world = new World(batch);
+        Gdx.input.setInputProcessor(new HandleInput());
     }
 
     @Override
     public void render() {
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            world.getMainCamera().moveUp(CAMERASPEED);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            world.getMainCamera().moveDown(CAMERASPEED);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            world.getMainCamera().moveLeft(CAMERASPEED);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            world.getMainCamera().moveRight(CAMERASPEED);
-        }
-
+        HandleInput.handlePollingInput(world);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
         world.draw();
