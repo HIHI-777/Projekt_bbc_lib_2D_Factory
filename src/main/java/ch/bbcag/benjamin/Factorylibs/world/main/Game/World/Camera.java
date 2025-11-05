@@ -1,4 +1,6 @@
-package ch.bbcag.benjamin.Factorylibs.world.main;
+package ch.bbcag.benjamin.Factorylibs.world.main.Game.World;
+
+import com.badlogic.gdx.math.Vector2;
 
 public class Camera {
     private int x, y;
@@ -26,6 +28,10 @@ public class Camera {
 
     public int getHeight() {
         return height;
+    }
+
+    public Vector2 getWorldPosFromCameraPos(Vector2 clickpos){
+        return clickpos;
     }
 
 

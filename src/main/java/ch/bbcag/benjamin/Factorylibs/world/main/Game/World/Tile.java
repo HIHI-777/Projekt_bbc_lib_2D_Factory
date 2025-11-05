@@ -1,4 +1,4 @@
-package ch.bbcag.benjamin.Factorylibs.world.main;
+package ch.bbcag.benjamin.Factorylibs.world.main.Game.World;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

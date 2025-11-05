@@ -1,5 +1,5 @@
 {
-  "chunkX": -1,
+  "chunkX": 1,
   "chunkY": 0,
   "tiles": {
     "tile_0": {
@@ -24,7 +24,7 @@
       "class": "Background",
       "x": 0,
       "y": 1,
-      "internalPath": "main/sprites/TestSprite.png"
+      "internalPath": "main/sprites/TestSprite02.png"
     }
   }
 }

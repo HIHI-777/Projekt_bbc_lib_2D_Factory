@@ -1,4 +1,4 @@
-package ch.bbcag.benjamin.Factorylibs.world.main;
+package ch.bbcag.benjamin.Factorylibs.world.main.Game.World;
 
 import ch.bbcag.benjamin.Factorylibs.help.json.ChunkLoader;
 import com.badlogic.gdx.Gdx;
@@ -16,7 +16,7 @@ public class Layer {
         chunks = new ArrayList<>();
         this.layer = layer;
 
-        loadChunksFromFolder("src/main/resources/World/chunks/Layer" + layer);
+        loadChunksFromFolder("src/main/resources/World/layers/Layer" + layer);
     }
 
 

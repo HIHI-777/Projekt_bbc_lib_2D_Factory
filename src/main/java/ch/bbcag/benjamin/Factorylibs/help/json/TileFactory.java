@@ -1,6 +1,6 @@
 package ch.bbcag.benjamin.Factorylibs.help.json;
 
-import ch.bbcag.benjamin.Factorylibs.world.main.Tile;
+import ch.bbcag.benjamin.Factorylibs.world.main.Game.World.Tile;
 
 public class TileFactory {
 

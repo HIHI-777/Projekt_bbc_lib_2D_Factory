@@ -1,4 +1,4 @@
-package ch.bbcag.benjamin.Factorylibs.world.main;
+package ch.bbcag.benjamin.Factorylibs.world.main.Game.World;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -22,7 +22,7 @@ public class World {
 
     private List<Layer> getLayers(){
         layers = new ArrayList<>();
-        File folder = new File("src/main/resources/World/chunks");
+        File folder = new File("src/main/resources/World/layers");
 
         if (folder.exists() && folder.isDirectory()) {
             File[] subDirs = folder.listFiles(File::isDirectory);

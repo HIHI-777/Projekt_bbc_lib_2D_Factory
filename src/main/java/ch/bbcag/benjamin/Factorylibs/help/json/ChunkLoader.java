@@ -4,8 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.JsonReader;
-import ch.bbcag.benjamin.Factorylibs.world.main.Chunk;
-import ch.bbcag.benjamin.Factorylibs.world.main.Tile;
+import ch.bbcag.benjamin.Factorylibs.world.main.Game.World.Chunk;
+import ch.bbcag.benjamin.Factorylibs.world.main.Game.World.Tile;
 
 public class ChunkLoader {
 

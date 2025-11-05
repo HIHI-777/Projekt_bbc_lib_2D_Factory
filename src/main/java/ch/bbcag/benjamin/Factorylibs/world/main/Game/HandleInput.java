@@ -1,5 +1,6 @@
-package ch.bbcag.benjamin.Factorylibs.world.main;
+package ch.bbcag.benjamin.Factorylibs.world.main.Game;
 
+import ch.bbcag.benjamin.Factorylibs.world.main.Game.World.World;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
