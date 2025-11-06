@@ -10,8 +10,6 @@ public class DesktopLauncher {
 
         config.setTitle("Placfactory");
         config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
-        config.setForegroundFPS(60);
-        config.setIdleFPS(60);
 
         // Set icons
         config.setWindowIcon(

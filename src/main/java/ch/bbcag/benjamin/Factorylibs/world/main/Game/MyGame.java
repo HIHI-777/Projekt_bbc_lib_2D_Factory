@@ -1,11 +1,11 @@
 package ch.bbcag.benjamin.Factorylibs.world.main.Game;
 
+import ch.bbcag.benjamin.Factorylibs.world.main.Game.Global.Variables;
 import ch.bbcag.benjamin.Factorylibs.world.main.Game.UI.UImain;
 import ch.bbcag.benjamin.Factorylibs.world.main.Game.World.World;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class MyGame extends ApplicationAdapter {
@@ -27,7 +27,7 @@ public class MyGame extends ApplicationAdapter {
         HandleInput.handlePollingInput(world);
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+        Variables.updateDeltatime();
         batch.begin();
         world.draw();
         ui.draw();

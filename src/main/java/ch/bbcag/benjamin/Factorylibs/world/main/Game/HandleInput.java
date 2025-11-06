@@ -6,24 +6,22 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 
-import java.util.Objects;
-
 public class HandleInput implements InputProcessor {
-    public static final float CAMERASPEED = 16f;
+    public static final float CAMERASPEED = 1000f;
 
     public static void handlePollingInput(World world){
         if (Variables.currentScene.equals("MainScene")){
-            if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-                world.getMainCamera().moveUp(CAMERASPEED);
+            if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) {
+                world.getMainCamera().moveUp((float) (CAMERASPEED * Variables.deltatime));
             }
-            if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-                world.getMainCamera().moveDown(CAMERASPEED);
+            if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+                world.getMainCamera().moveDown((float) (CAMERASPEED * Variables.deltatime));
             }
-            if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-                world.getMainCamera().moveLeft(CAMERASPEED);
+            if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+                world.getMainCamera().moveLeft((float) (CAMERASPEED * Variables.deltatime));
             }
-            if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-                world.getMainCamera().moveRight(CAMERASPEED);
+            if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+                world.getMainCamera().moveRight((float) (CAMERASPEED * Variables.deltatime));
             }
         }
     }
