@@ -14,13 +14,13 @@ public class Variables {
     public static double deltatime;
     public static final String varsPath = "src/main/resources/World/GlobalVariables/vars.json";
 
-    public static void updateDeltatime(){
+    public static void updateDeltatime() {
         long currentime = System.nanoTime();
         deltatime = (double) (currentime - lasttime) / 1_000_000_000;
         lasttime = currentime;
     }
 
-    public static void getVars(){
+    public static void getVars() {
         FileHandle file = Gdx.files.internal(varsPath);
 
         if (!file.exists() || !file.file().isFile()) {

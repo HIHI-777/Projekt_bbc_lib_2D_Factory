@@ -4,7 +4,8 @@ import ch.bbcag.benjamin.Factorylibs.world.main.Game.UI.Scene;
 
 public class SceneFactory {
     private static final String SCENE_PACKAGE = "ch.bbcag.benjamin.Factorylibs.world.main.UIClasses.";
-    public static Scene createScene(String className, String internalPath){
+
+    public static Scene createScene(String className, String internalPath) {
         try {
             if (!className.contains(".")) {
                 className = SCENE_PACKAGE + className;

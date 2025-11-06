@@ -11,8 +11,8 @@ public class Background extends Tile {
 
     @Override
     public void draw(Camera camera) {
-        camera.getBatch().setColor(1, 1, 1, 0.5f);
+        camera.batch().setColor(1, 1, 1, 0.5f);
         super.draw(camera);
-        camera.getBatch().setColor(1, 1, 1, 1);
+        camera.batch().setColor(1, 1, 1, 1);
     }
 }

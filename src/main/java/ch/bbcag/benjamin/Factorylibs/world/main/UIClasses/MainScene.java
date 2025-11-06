@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class MainScene extends Scene {
     BitmapFont font;
+
     public MainScene(String internalPath) {
         super(internalPath);
         this.visable = true;

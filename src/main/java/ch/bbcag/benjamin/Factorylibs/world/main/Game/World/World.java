@@ -21,7 +21,7 @@ public class World {
 
     }
 
-    private List<Layer> getLayers(){
+    private List<Layer> getLayers() {
         layers = new ArrayList<>();
         File folder = new File("src/main/resources/World/layers");
 
@@ -41,14 +41,14 @@ public class World {
         return layers;
     }
 
-    public void draw(){
+    public void draw() {
         for (Layer layer : layers) {
             layer.draw(mainCamera);
         }
     }
 
     public void dispose() {
-        for (Layer layer: layers){
+        for (Layer layer : layers) {
             layer.dispose();
         }
     }

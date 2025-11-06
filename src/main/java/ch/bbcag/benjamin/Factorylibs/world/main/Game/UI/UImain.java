@@ -6,28 +6,29 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.util.List;
 
 public class UImain {
-    private List<Scene> scenes;
+    private final List<Scene> scenes;
     SpriteBatch batch;
 
-    public UImain(SpriteBatch batch){
+    public UImain(SpriteBatch batch) {
         this.batch = batch;
         scenes = getScenes();
     }
 
-    public List<Scene> getScenes(){
+    public List<Scene> getScenes() {
         return SceneLoader.loadScenesFromJson("src/main/resources/World/Scenes");
     }
 
-    public void draw(){
-        for (Scene scene: scenes){
+    public void draw() {
+        for (Scene scene : scenes) {
             scene.update();
             if (scene.isVisable()) {
                 scene.draw(batch);
             }
         }
     }
-    public void dispose(){
-        for (Scene scene: scenes){
+
+    public void dispose() {
+        for (Scene scene : scenes) {
             scene.dispose();
         }
     }

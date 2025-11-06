@@ -2,7 +2,7 @@ package ch.bbcag.benjamin.Factorylibs.world.main.Game.World;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class ChunkTest {
 

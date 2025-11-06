@@ -12,7 +12,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class SceneLoader {
-    public static List<Scene> loadScenesFromJson(String SceneFolderpath){
+    public static List<Scene> loadScenesFromJson(String SceneFolderpath) {
         try {
             List<Scene> scenes = new ArrayList<>();
             File folder = new File(SceneFolderpath);
@@ -20,7 +20,7 @@ public class SceneLoader {
                 File[] subFiles = folder.listFiles();
                 if (subFiles != null) {
                     Arrays.sort(subFiles, Comparator.comparing(File::getName));
-                    for (File  f: subFiles) {
+                    for (File f : subFiles) {
                         String jsonString = Gdx.files.internal(f.getPath()).readString();
                         JsonValue root = new JsonReader().parse(jsonString);
 

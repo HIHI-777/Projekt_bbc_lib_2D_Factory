@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Layer {
-    private List<Chunk> chunks;
+    private final List<Chunk> chunks;
     private final int layer;
 
-    public Layer(int layer){
+    public Layer(int layer) {
         chunks = new ArrayList<>();
         this.layer = layer;
 
@@ -48,7 +48,7 @@ public class Layer {
         }
     }
 
-    public void draw(Camera camera){
+    public void draw(Camera camera) {
         for (Chunk chunk : chunks) {
             if (chunk.isinsidecamera(camera)) {
                 chunk.draw(camera);
@@ -62,7 +62,11 @@ public class Layer {
         }
     }
 
-    public List<Chunk> getChunks() { return chunks; }
+    public List<Chunk> getChunks() {
+        return chunks;
+    }
 
-    public int getLayer() { return layer; }
+    public int getLayer() {
+        return layer;
+    }
 }

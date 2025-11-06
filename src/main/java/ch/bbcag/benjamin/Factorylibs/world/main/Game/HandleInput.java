@@ -9,8 +9,8 @@ import com.badlogic.gdx.InputProcessor;
 public class HandleInput implements InputProcessor {
     public static final float CAMERASPEED = 1000f;
 
-    public static void handlePollingInput(World world){
-        if (Variables.currentScene.equals("MainScene")){
+    public static void handlePollingInput(World world) {
+        if (Variables.currentScene.equals("MainScene")) {
             if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) {
                 world.getMainCamera().moveUp((float) (CAMERASPEED * Variables.deltatime));
             }
@@ -79,10 +79,10 @@ public class HandleInput implements InputProcessor {
 
     @Override
     public boolean scrolled(float amountX, float amountY) {
-        if (amountY < 0){
+        if (amountY < 0) {
             System.out.println("Up");
         }
-        if (amountY > 0){
+        if (amountY > 0) {
             System.out.println("Down");
         }
         return false;

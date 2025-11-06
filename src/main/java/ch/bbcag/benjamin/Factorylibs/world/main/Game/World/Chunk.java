@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Chunk{
+public class Chunk {
     private final Vector2 chunkPos;
     private final List<Tile> tiles;
 
@@ -33,12 +33,12 @@ public class Chunk{
         tiles.add(tile);
     }
 
-    public boolean isintheSameSpot(Chunk other){
+    public boolean isintheSameSpot(Chunk other) {
         return this.chunkPos.x == other.getChunkX() && this.chunkPos.y == other.getChunkY();
     }
 
-    public void draw(Camera camera){
-        for (Tile tile: this.tiles) {
+    public void draw(Camera camera) {
+        for (Tile tile : this.tiles) {
             tile.draw(camera);
         }
     }
@@ -49,19 +49,27 @@ public class Chunk{
         float chunkPixelWidth = Chunk.WIDTH * Tile.TILESIZE;
         float chunkPixelHeight = Chunk.HEIGHT * Tile.TILESIZE;
 
-        boolean xOverlap = chunkPixelX > camera.getX() || chunkPixelX + chunkPixelWidth < camera.getX() + camera.getWidth();
-        boolean yOverlap = chunkPixelY > camera.getY() || chunkPixelY + chunkPixelHeight < camera.getY() + camera.getHeight();
+        boolean xOverlap = chunkPixelX > camera.getX() || chunkPixelX + chunkPixelWidth < camera.getX() + camera.width();
+        boolean yOverlap = chunkPixelY > camera.getY() || chunkPixelY + chunkPixelHeight < camera.getY() + camera.height();
         return xOverlap && yOverlap;
     }
 
-    public void dispose(){
-        for (Tile tile: tiles){
+    public void dispose() {
+        for (Tile tile : tiles) {
             tile.dispose();
         }
     }
 
     // Getters
-    public float getChunkX() { return chunkPos.x; }
-    public float getChunkY() { return chunkPos.y; }
-    public List<Tile> getTiles() { return tiles; }
+    public float getChunkX() {
+        return chunkPos.x;
+    }
+
+    public float getChunkY() {
+        return chunkPos.y;
+    }
+
+    public List<Tile> getTiles() {
+        return tiles;
+    }
 }
