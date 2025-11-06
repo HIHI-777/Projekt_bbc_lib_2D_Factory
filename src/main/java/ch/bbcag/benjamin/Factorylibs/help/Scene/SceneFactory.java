@@ -1,7 +1,6 @@
 package ch.bbcag.benjamin.Factorylibs.help.Scene;
 
 import ch.bbcag.benjamin.Factorylibs.world.main.Game.UI.Scene;
-import ch.bbcag.benjamin.Factorylibs.world.main.Game.World.Tile;
 
 public class SceneFactory {
     private static final String SCENE_PACKAGE = "ch.bbcag.benjamin.Factorylibs.world.main.UIClasses.";

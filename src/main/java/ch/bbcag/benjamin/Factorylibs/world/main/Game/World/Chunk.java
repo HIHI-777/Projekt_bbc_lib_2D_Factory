@@ -1,13 +1,12 @@
 package ch.bbcag.benjamin.Factorylibs.world.main.Game.World;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Chunk{
-    private final int chunkX;
-    private final int chunkY;
+    private final Vector2 chunkPos;
     private final List<Tile> tiles;
 
     public static final int WIDTH = 16;
@@ -15,9 +14,8 @@ public class Chunk{
     public static final int MAX_TILES = WIDTH * HEIGHT;
 
 
-    public Chunk(int chunkX, int chunkY) {
-        this.chunkX = chunkX;
-        this.chunkY = chunkY;
+    public Chunk(float chunkX, float chunkY) {
+        this.chunkPos = new Vector2(chunkX, chunkY);
         this.tiles = new ArrayList<>(MAX_TILES);
     }
 
@@ -35,19 +33,21 @@ public class Chunk{
         tiles.add(tile);
     }
 
-    public boolean isintheSameSpot(Chunk other){ return this.chunkX == other.getChunkX() && this.chunkY == other.getChunkY(); }
+    public boolean isintheSameSpot(Chunk other){
+        return this.chunkPos.x == other.getChunkX() && this.chunkPos.y == other.getChunkY();
+    }
 
-    public void draw(SpriteBatch batch, Camera camera){
+    public void draw(Camera camera){
         for (Tile tile: this.tiles) {
-            tile.draw(batch, camera, this);
+            tile.draw(camera);
         }
     }
 
     public boolean isinsidecamera(Camera camera) {
-        int chunkPixelX = chunkX * Tile.TILESIZE;
-        int chunkPixelY = chunkY * Tile.TILESIZE;
-        int chunkPixelWidth = Chunk.WIDTH * Tile.TILESIZE;
-        int chunkPixelHeight = Chunk.HEIGHT * Tile.TILESIZE;
+        float chunkPixelX = chunkPos.x * Tile.TILESIZE;
+        float chunkPixelY = chunkPos.y * Tile.TILESIZE;
+        float chunkPixelWidth = Chunk.WIDTH * Tile.TILESIZE;
+        float chunkPixelHeight = Chunk.HEIGHT * Tile.TILESIZE;
 
         boolean xOverlap = chunkPixelX > camera.getX() || chunkPixelX + chunkPixelWidth < camera.getX() + camera.getWidth();
         boolean yOverlap = chunkPixelY > camera.getY() || chunkPixelY + chunkPixelHeight < camera.getY() + camera.getHeight();
@@ -61,7 +61,7 @@ public class Chunk{
     }
 
     // Getters
-    public int getChunkX() { return chunkX; }
-    public int getChunkY() { return chunkY; }
+    public float getChunkX() { return chunkPos.x; }
+    public float getChunkY() { return chunkPos.y; }
     public List<Tile> getTiles() { return tiles; }
 }

@@ -3,7 +3,6 @@ package ch.bbcag.benjamin.Factorylibs.world.main.Game.World;
 import ch.bbcag.benjamin.Factorylibs.help.json.ChunkLoader;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,10 +48,10 @@ public class Layer {
         }
     }
 
-    public void draw(SpriteBatch batch, Camera camera){
+    public void draw(Camera camera){
         for (Chunk chunk : chunks) {
             if (chunk.isinsidecamera(camera)) {
-                chunk.draw(batch, camera);
+                chunk.draw(camera);
             }
         }
     }

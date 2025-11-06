@@ -20,7 +20,10 @@ public class UImain {
 
     public void draw(){
         for (Scene scene: scenes){
-            scene.draw(batch);
+            scene.update();
+            if (scene.isVisable()) {
+                scene.draw(batch);
+            }
         }
     }
     public void dispose(){

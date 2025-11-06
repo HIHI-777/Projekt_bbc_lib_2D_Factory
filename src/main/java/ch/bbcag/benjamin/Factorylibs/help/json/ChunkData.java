@@ -1,7 +1,6 @@
 package ch.bbcag.benjamin.Factorylibs.help.json;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class ChunkData {
     public int chunkX;

@@ -1,31 +1,47 @@
 package ch.bbcag.benjamin.Factorylibs.world.main.Game;
 
+import ch.bbcag.benjamin.Factorylibs.world.main.Game.Global.Variables;
 import ch.bbcag.benjamin.Factorylibs.world.main.Game.World.World;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 
+import java.util.Objects;
+
 public class HandleInput implements InputProcessor {
-    public static final int CAMERASPEED = 16;
+    public static final float CAMERASPEED = 16f;
 
     public static void handlePollingInput(World world){
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            world.getMainCamera().moveUp(CAMERASPEED);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            world.getMainCamera().moveDown(CAMERASPEED);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            world.getMainCamera().moveLeft(CAMERASPEED);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            world.getMainCamera().moveRight(CAMERASPEED);
+        if (Variables.currentScene.equals("MainScene")){
+            if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+                world.getMainCamera().moveUp(CAMERASPEED);
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+                world.getMainCamera().moveDown(CAMERASPEED);
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+                world.getMainCamera().moveLeft(CAMERASPEED);
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+                world.getMainCamera().moveRight(CAMERASPEED);
+            }
         }
     }
 
     @Override
     public boolean keyDown(int keycode) {
-        return false;
+        if (keycode == Input.Keys.ESCAPE) {
+            if (Variables.currentScene.equals("ExitMenu") || Variables.currentScene.equals("MainScene")) {
+                if (!Variables.isExitMenuOpen) {
+                    Variables.currentScene = "ExitMenu";
+                    Variables.isExitMenuOpen = true;
+                } else {
+                    Variables.currentScene = "MainScene";
+                    Variables.isExitMenuOpen = false;
+                }
+            }
+        }
+        return true;
     }
 
     @Override

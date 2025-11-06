@@ -12,7 +12,6 @@ public class MyGame extends ApplicationAdapter {
     private SpriteBatch batch;
     private World world;
     private UImain ui;
-    private BitmapFont font;
 
     @Override
     public void create() {

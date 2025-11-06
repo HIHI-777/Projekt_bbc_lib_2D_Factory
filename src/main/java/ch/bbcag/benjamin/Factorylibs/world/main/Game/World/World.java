@@ -1,5 +1,6 @@
 package ch.bbcag.benjamin.Factorylibs.world.main.Game.World;
 
+import ch.bbcag.benjamin.Factorylibs.world.main.Game.Global.Variables;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -12,12 +13,12 @@ import java.util.List;
 public class World {
     private List<Layer> layers;
     private Camera mainCamera;
-    private SpriteBatch batch;
 
     public World(SpriteBatch batch) {
-        mainCamera = new Camera(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        Variables.getVars();
+        mainCamera = new Camera(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), batch);
         layers = getLayers();
-        this.batch = batch;
+
     }
 
     private List<Layer> getLayers(){
@@ -42,7 +43,7 @@ public class World {
 
     public void draw(){
         for (Layer layer : layers) {
-            layer.draw(batch, mainCamera);
+            layer.draw(mainCamera);
         }
     }
 

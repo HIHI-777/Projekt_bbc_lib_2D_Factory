@@ -12,7 +12,6 @@ public class ChunkLoader {
     public static Chunk loadChunkFromJson(String path) {
         try {
             String jsonString = Gdx.files.internal(path).readString();
-            Json json = new Json();
             JsonValue root = new JsonReader().parse(jsonString);
 
             int chunkX = root.getInt("chunkX");
@@ -28,7 +27,7 @@ public class ChunkLoader {
                     int y = tileEntry.getInt("y");
                     String internalPath = tileEntry.getString("internalPath");
 
-                    Tile tile = TileFactory.createTile(className, x, y, internalPath);
+                    Tile tile = TileFactory.createTile(className, x, y, internalPath, chunk);
                     chunk.addTile(tile);
                 }
             }
