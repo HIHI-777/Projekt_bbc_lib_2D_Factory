@@ -18,7 +18,7 @@ public record Camera(Vector2 pos, int width, int height, SpriteBatch batch) {
     }
 
     public Vector2 getWorldPosFromCameraPos(Vector2 clickpos) {
-        return clickpos;
+        return pos.add(clickpos);
     }
 
 
