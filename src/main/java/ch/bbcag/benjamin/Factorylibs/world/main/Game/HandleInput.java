@@ -12,16 +12,16 @@ public class HandleInput implements InputProcessor {
     public static void handlePollingInput(World world) {
         if (Variables.currentScene.equals("MainScene")) {
             if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) {
-                world.getMainCamera().moveUp((float) (CAMERASPEED * Variables.deltatime));
+                world.getMainCamera().moveUp((float) (CAMERASPEED * Variables.deltatime * Variables.PREFERDHEIGHTMULTIPLIER));
             }
             if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-                world.getMainCamera().moveDown((float) (CAMERASPEED * Variables.deltatime));
+                world.getMainCamera().moveDown((float) (CAMERASPEED * Variables.deltatime * Variables.PREFERDHEIGHTMULTIPLIER));
             }
             if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-                world.getMainCamera().moveLeft((float) (CAMERASPEED * Variables.deltatime));
+                world.getMainCamera().moveLeft((float) (CAMERASPEED * Variables.deltatime * Variables.PREFERDWIDTHMULTIPLIER));
             }
             if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-                world.getMainCamera().moveRight((float) (CAMERASPEED * Variables.deltatime));
+                world.getMainCamera().moveRight((float) (CAMERASPEED * Variables.deltatime * Variables.PREFERDWIDTHMULTIPLIER));
             }
         }
     }

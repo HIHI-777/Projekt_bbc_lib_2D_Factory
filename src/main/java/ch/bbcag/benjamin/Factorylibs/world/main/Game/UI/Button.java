@@ -1,5 +1,6 @@
 package ch.bbcag.benjamin.Factorylibs.world.main.Game.UI;
 
+import ch.bbcag.benjamin.Factorylibs.world.main.Game.Global.Variables;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -18,10 +19,10 @@ public abstract class Button {
 
     public void draw(SpriteBatch batch) {
         batch.draw(img,
-                (float) Gdx.graphics.getWidth() / 3840 * pos.x,
-                (float) Gdx.graphics.getHeight() / 2160 * pos.y,
-                (float) Gdx.graphics.getWidth() / 3840 * img.getWidth(),
-                (float) Gdx.graphics.getHeight() / 2160 * img.getHeight());
+                (float) Variables.PREFERDWIDTHMULTIPLIER * pos.x,
+                (float) Variables.PREFERDHEIGHTMULTIPLIER * pos.y,
+                (float) Variables.PREFERDWIDTHMULTIPLIER * img.getWidth(),
+                (float) Variables.PREFERDHEIGHTMULTIPLIER * img.getHeight());
     }
 
     public void dispose() {

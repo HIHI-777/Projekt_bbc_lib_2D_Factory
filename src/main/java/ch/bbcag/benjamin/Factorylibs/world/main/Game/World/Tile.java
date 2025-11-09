@@ -1,5 +1,6 @@
 package ch.bbcag.benjamin.Factorylibs.world.main.Game.World;
 
+import ch.bbcag.benjamin.Factorylibs.world.main.Game.Global.Variables;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
@@ -8,7 +9,7 @@ public abstract class Tile {
     private final Texture img;
     private final Chunk parentChunk;
 
-    public static final int TILESIZE = 32;
+    public static final int TILESIZE = 32 * Variables.PREFERDWIDTHMULTIPLIER;
 
     public Tile(float x, float y, String internalPath, Chunk parentChunk) {
         if (x < 0 || x > 15 || y < 0 || y > 15) {
@@ -63,7 +64,7 @@ public abstract class Tile {
     public void draw(Camera camera) {
         float x = ((this.parentChunk.getChunkX() * Chunk.WIDTH * TILESIZE) + this.pos.x * TILESIZE) + camera.getX();
         float y = ((this.parentChunk.getChunkY() * Chunk.HEIGHT * TILESIZE) + this.pos.y * TILESIZE) + camera.getY();
-        camera.batch().draw(this.img, x, y);
+        camera.batch().draw(this.img, x, y, TILESIZE, TILESIZE);
     }
 
     public void dispose() {

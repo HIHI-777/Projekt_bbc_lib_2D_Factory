@@ -8,6 +8,10 @@ import com.badlogic.gdx.utils.JsonValue;
 import java.lang.reflect.Field;
 
 public class Variables {
+    public static final int PREFERDWIDTH = 1920;
+    public static final int PREFERDHEIGHT = 1080;
+    public static final int PREFERDWIDTHMULTIPLIER = Gdx.graphics.getWidth() / PREFERDWIDTH;
+    public static final int PREFERDHEIGHTMULTIPLIER = Gdx.graphics.getHeight() / PREFERDHEIGHT;
     public static String currentScene;
     public static boolean isExitMenuOpen;
     public static long lasttime = System.nanoTime();

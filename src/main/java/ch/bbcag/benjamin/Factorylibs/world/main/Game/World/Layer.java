@@ -1,6 +1,6 @@
 package ch.bbcag.benjamin.Factorylibs.world.main.Game.World;
 
-import ch.bbcag.benjamin.Factorylibs.help.json.ChunkLoader;
+import ch.bbcag.benjamin.Factorylibs.help.Chunk.ChunkLoader;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 

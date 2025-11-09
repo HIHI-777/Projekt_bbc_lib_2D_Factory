@@ -1,4 +1,4 @@
-package ch.bbcag.benjamin.Factorylibs.help.json;
+package ch.bbcag.benjamin.Factorylibs.help.Chunk;
 
 import java.util.HashMap;
 
