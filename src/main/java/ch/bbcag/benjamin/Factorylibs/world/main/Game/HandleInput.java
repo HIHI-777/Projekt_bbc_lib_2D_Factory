@@ -4,7 +4,6 @@ import ch.bbcag.benjamin.Factorylibs.world.main.Game.Global.Variables;
 import ch.bbcag.benjamin.Factorylibs.world.main.Game.UI.UImain;
 import ch.bbcag.benjamin.Factorylibs.world.main.Game.World.Camera;
 import ch.bbcag.benjamin.Factorylibs.world.main.Game.World.World;
-import ch.bbcag.benjamin.Factorylibs.world.main.tileClasses.Forground;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
@@ -12,9 +11,9 @@ import com.badlogic.gdx.math.Vector2;
 
 public class HandleInput implements InputProcessor {
     public static final float CAMERASPEED = 1000f;
-    private World world;
-    private UImain ui;
-    private Camera camera;
+    private final World world;
+    private final UImain ui;
+    private final Camera camera;
 
     public HandleInput(World world, UImain ui, Camera camera) {
         this.world = world;
@@ -68,8 +67,8 @@ public class HandleInput implements InputProcessor {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         Vector2 clickpos = new Vector2(screenX, Gdx.graphics.getHeight() - screenY);
-        world.setTileFromWorldPosAndLayer(camera.getWorldPosFromCameraPos(clickpos));
-        return ui.click(clickpos);
+        world.setTileFromWorldPosAndLayer(camera.getWorldPosFromCameraPos(new Vector2(clickpos)));
+        return ui.click(new Vector2(clickpos));
     }
 
     @Override

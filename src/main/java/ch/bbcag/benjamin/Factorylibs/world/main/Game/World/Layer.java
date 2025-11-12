@@ -8,6 +8,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Layer implements Drawable {
@@ -45,7 +46,7 @@ public class Layer implements Drawable {
                     chunks.add(chunk);
                 } catch (Exception e) {
                     System.err.println("Failed to load chunk: " + file.name());
-                    e.printStackTrace();
+                    System.err.println(Arrays.toString(e.getStackTrace()));
                 }
             }
         }
@@ -77,23 +78,11 @@ public class Layer implements Drawable {
         for (Chunk chunk : chunks){
             if(chunk.getChunkX() == copyofWorldpos.x && chunk.getChunkY() == copyofWorldpos.y){
                 Vector2 tilepos;
-                if (copyofWorldpos.x >= 0 && copyofWorldpos.y >= 0) {
-                    tilepos = new Vector2((float) Math.floor((worldpos.x / Tile.TILESIZE) % Chunk.WIDTH), (float) Math.floor((worldpos.y / Tile.TILESIZE) % Chunk.HEIGHT));
-                } else if (copyofWorldpos.x < 0 && copyofWorldpos.y >= 0) {
-                    float x = (float) Math.floor(Chunk.WIDTH + (worldpos.x / Tile.TILESIZE) % Chunk.WIDTH);
-                    float y = (float) Math.floor((worldpos.y / Tile.TILESIZE) % Chunk.HEIGHT);
-                    tilepos = new Vector2(x, y);
-                } else if (copyofWorldpos.x >= 0 && copyofWorldpos.y < 0) {
-                    float x = (float) Math.floor((worldpos.x / Tile.TILESIZE) % Chunk.WIDTH);
-                    float y = (float) Math.floor(Chunk.HEIGHT + (worldpos.y / Tile.TILESIZE) % Chunk.HEIGHT);
-                    tilepos = new Vector2(x, y);
-                } else if (copyofWorldpos.x < 0 && copyofWorldpos.y < 0) {
-                    float x = (float) Math.floor(Chunk.WIDTH + (worldpos.x / Tile.TILESIZE) % Chunk.WIDTH);
-                    float y = (float) Math.floor(Chunk.HEIGHT + (worldpos.y / Tile.TILESIZE) % Chunk.HEIGHT);
-                    tilepos = new Vector2(x, y);
-                } else {
-                    throw new RuntimeException("Java is Broken");
-                }
+                float x = (float) Math.floor((worldpos.x / Tile.TILESIZE) % Chunk.WIDTH);
+                if (copyofWorldpos.x < 0) x += Chunk.WIDTH;
+                float y = (float) Math.floor((worldpos.y / Tile.TILESIZE) % Chunk.HEIGHT);
+                if (copyofWorldpos.y < 0) y += Chunk.HEIGHT;
+                tilepos = new Vector2(x, y);
                 Tile tile = TileFactory.createTile(Variables.currentTileType, (int) tilepos.x, (int) tilepos.y, Variables.currentInternalTilePath, chunk);
                 chunk.addTile(tile);
             }
