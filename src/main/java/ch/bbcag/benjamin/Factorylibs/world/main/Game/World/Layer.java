@@ -71,12 +71,12 @@ public class Layer implements Drawable {
         return chunks;
     }
 
-    public void setTileFromWorldpos(Vector2 worldpos){
+    public void setTileFromWorldpos(Vector2 worldpos) {
         Vector2 copyofWorldpos = new Vector2(worldpos);
         copyofWorldpos.x = (float) Math.floor(copyofWorldpos.x / (Chunk.WIDTH * Tile.TILESIZE));
         copyofWorldpos.y = (float) Math.floor(copyofWorldpos.y / (Chunk.HEIGHT * Tile.TILESIZE));
-        for (Chunk chunk : chunks){
-            if(chunk.getChunkX() == copyofWorldpos.x && chunk.getChunkY() == copyofWorldpos.y){
+        for (Chunk chunk : chunks) {
+            if (chunk.getChunkX() == copyofWorldpos.x && chunk.getChunkY() == copyofWorldpos.y) {
                 Vector2 tilepos;
                 float x = (float) Math.floor((worldpos.x / Tile.TILESIZE) % Chunk.WIDTH);
                 if (copyofWorldpos.x < 0) x += Chunk.WIDTH;

@@ -26,7 +26,7 @@ public abstract class Button implements Drawable {
                 (float) Variables.PREFERDHEIGHTMULTIPLIER * img.getHeight());
     }
 
-    protected boolean isInButton(Vector2 pos){
+    protected boolean isInButton(Vector2 pos) {
         boolean xOverlap = pos.x > this.pos.x && pos.x < this.pos.x + img.getWidth();
         boolean yOverlap = pos.y > this.pos.y && pos.y < this.pos.y + img.getHeight();
         return xOverlap && yOverlap;
@@ -34,17 +34,5 @@ public abstract class Button implements Drawable {
 
     public void dispose() {
         img.dispose();
-    }
-
-    public Vector2 getPos() {
-        return pos;
-    }
-
-    public int getWidth() {
-        return img.getWidth();
-    }
-
-    public int getHeight() {
-        return img.getHeight();
     }
 }

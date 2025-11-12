@@ -51,9 +51,9 @@ public class World implements Drawable {
         }
     }
 
-    public void setTileFromWorldPosAndLayer(Vector2 worldPos){
+    public void setTileFromWorldPosAndLayer(Vector2 worldPos) {
         for (Layer layer1 : layers) {
-            if (layer1.getLayer() == Variables.currentLayer){
+            if (layer1.getLayer() == Variables.currentLayer) {
                 System.out.println(Variables.currentLayer);
                 layer1.setTileFromWorldpos(worldPos);
             }

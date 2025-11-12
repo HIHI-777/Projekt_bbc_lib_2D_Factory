@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Objects;
 
 public abstract class Scene implements Drawable {
+    private final Texture img;
     protected boolean visable;
     protected List<Button> buttons;
-    private final Texture img;
 
     public Scene(String internalPath) {
         this.img = new Texture(internalPath);

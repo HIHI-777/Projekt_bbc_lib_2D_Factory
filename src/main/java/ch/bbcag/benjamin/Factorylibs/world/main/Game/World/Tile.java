@@ -6,12 +6,12 @@ import com.badlogic.gdx.math.Vector2;
 
 public abstract class Tile {
     public static final int TILESIZE = 32 * Variables.PREFERDWIDTHMULTIPLIER;
-    private Vector2 pos;
     private final Texture img;
     private final Chunk parentChunk;
+    private final Vector2 pos;
 
     public Tile(float x, float y, String internalPath, Chunk parentChunk) {
-        if (x < 0 || x > Chunk.WIDTH -1 || y < 0 || y > Chunk.HEIGHT - 1) {
+        if (x < 0 || x > Chunk.WIDTH - 1 || y < 0 || y > Chunk.HEIGHT - 1) {
             throw new IllegalArgumentException(
                     "Tile coordinates out of range (must be 0-" + (Chunk.WIDTH - 1) + "): x=" + x + ", y=" + y
             );
@@ -20,22 +20,13 @@ public abstract class Tile {
         this.img = new Texture(internalPath);
         this.parentChunk = parentChunk;
     }
-    public Tile(Vector2 pos, String internalPath, Chunk parentChunk) {
-        if (pos.x < 0 || pos.x > Chunk.WIDTH -1 || pos.y < 0 || pos.y > Chunk.HEIGHT - 1) {
-            throw new IllegalArgumentException(
-                    "Tile coordinates out of range (must be 0-" + (Chunk.WIDTH - 1) + "): x=" + pos.x + ", y=" + pos.y
-            );
-        }
-        this.pos = new Vector2(pos);
-        this.img = new Texture(internalPath);
-        this.parentChunk = parentChunk;
-    }
 
     public boolean isintheSameSpot(Tile other) {
         return this.pos.x == other.getX() && this.pos.y == other.getY();
     }
 
-    public void setPos(Vector2 pos){
+    /*
+    public void setPos(Vector2 pos) {
         this.pos = pos;
     }
 
@@ -61,6 +52,7 @@ public abstract class Tile {
         }
         return null;
     }
+     */
 
     public float getX() {
         return this.pos.x;
@@ -68,10 +60,6 @@ public abstract class Tile {
 
     public float getY() {
         return this.pos.y;
-    }
-
-    public Chunk getParentChunk() {
-        return this.parentChunk;
     }
 
     public void draw(Camera camera) {

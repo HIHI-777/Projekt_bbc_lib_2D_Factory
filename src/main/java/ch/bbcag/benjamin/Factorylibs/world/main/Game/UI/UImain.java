@@ -29,15 +29,18 @@ public class UImain implements Drawable {
         }
     }
 
-    public boolean click(Vector2 mousePos){
-        for (Scene scene : scenes){
-            if (scene.getClass().getSimpleName().equals(Variables.currentScene)){
-                for (Button button : scene.buttons){
-                    button.click(mousePos);
+    public boolean click(Vector2 mousePos) {
+        boolean result = false;
+        for (Scene scene : scenes) {
+            if (scene.getClass().getSimpleName().equals(Variables.currentScene)) {
+                for (Button button : scene.buttons) {
+                    if (button.click(mousePos)){
+                        result = true;
+                    }
                 }
             }
         }
-        return false;
+        return result;
     }
 
     public void dispose() {

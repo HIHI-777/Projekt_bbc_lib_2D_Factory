@@ -2,9 +2,7 @@ package ch.bbcag.benjamin.Factorylibs.world.main.ButtonClasses;
 
 import ch.bbcag.benjamin.Factorylibs.world.main.Game.UI.TextButton;
 import ch.bbcag.benjamin.Factorylibs.world.main.Game.World.Camera;
-import ch.bbcag.benjamin.Factorylibs.world.main.Game.World.Chunk;
 import ch.bbcag.benjamin.Factorylibs.world.main.Game.World.Drawable;
-import ch.bbcag.benjamin.Factorylibs.world.main.Game.World.Tile;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -18,10 +16,10 @@ public class ExitButton extends TextButton implements Drawable {
 
     @Override
     public boolean click(Vector2 mousePos) {
-        if (isInButton(mousePos)){
+        if (isInButton(mousePos)) {
             Gdx.app.exit();
             return true;
-        }else {
+        } else {
             return false;
         }
     }
