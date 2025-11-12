@@ -1,8 +1,7 @@
 package ch.bbcag.benjamin.Factorylibs.world.main.Game.World;
 
 import ch.bbcag.benjamin.Factorylibs.world.main.Game.Global.Variables;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -10,15 +9,13 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-public class World {
+public class World implements Drawable {
     private List<Layer> layers;
-    private Camera mainCamera;
 
-    public World(SpriteBatch batch) {
+
+    public World() {
         Variables.getVars();
-        mainCamera = new Camera(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), batch);
         layers = getLayers();
-
     }
 
     private List<Layer> getLayers() {
@@ -41,9 +38,10 @@ public class World {
         return layers;
     }
 
-    public void draw() {
+    @Override
+    public void draw(Camera camera) {
         for (Layer layer : layers) {
-            layer.draw(mainCamera);
+            layer.draw(camera);
         }
     }
 
@@ -53,7 +51,12 @@ public class World {
         }
     }
 
-    public Camera getMainCamera() {
-        return mainCamera;
+    public void setTileFromWorldPosAndLayer(Vector2 worldPos){
+        for (Layer layer1 : layers) {
+            if (layer1.getLayer() == Variables.currentLayer){
+                System.out.println(Variables.currentLayer);
+                layer1.setTileFromWorldpos(worldPos);
+            }
+        }
     }
 }

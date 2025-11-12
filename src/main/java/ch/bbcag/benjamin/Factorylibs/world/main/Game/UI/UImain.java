@@ -1,16 +1,17 @@
 package ch.bbcag.benjamin.Factorylibs.world.main.Game.UI;
 
 import ch.bbcag.benjamin.Factorylibs.help.Scene.SceneLoader;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import ch.bbcag.benjamin.Factorylibs.world.main.Game.Global.Variables;
+import ch.bbcag.benjamin.Factorylibs.world.main.Game.World.Camera;
+import ch.bbcag.benjamin.Factorylibs.world.main.Game.World.Drawable;
+import com.badlogic.gdx.math.Vector2;
 
 import java.util.List;
 
-public class UImain {
+public class UImain implements Drawable {
     private final List<Scene> scenes;
-    SpriteBatch batch;
 
-    public UImain(SpriteBatch batch) {
-        this.batch = batch;
+    public UImain() {
         scenes = getScenes();
     }
 
@@ -18,13 +19,25 @@ public class UImain {
         return SceneLoader.loadScenesFromJson("src/main/resources/World/Scenes");
     }
 
-    public void draw() {
+    @Override
+    public void draw(Camera camera) {
         for (Scene scene : scenes) {
             scene.update();
             if (scene.isVisable()) {
-                scene.draw(batch);
+                scene.draw(camera);
             }
         }
+    }
+
+    public boolean click(Vector2 mousePos){
+        for (Scene scene : scenes){
+            if (scene.getClass().getSimpleName().equals(Variables.currentScene)){
+                for (Button button : scene.buttons){
+                    button.click(mousePos);
+                }
+            }
+        }
+        return false;
     }
 
     public void dispose() {

@@ -5,13 +5,12 @@ import com.badlogic.gdx.math.Vector2;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Chunk {
-    private final Vector2 chunkPos;
-    private final List<Tile> tiles;
-
+public class Chunk implements Drawable {
     public static final int WIDTH = 16;
     public static final int HEIGHT = 16;
     public static final int MAX_TILES = WIDTH * HEIGHT;
+    private final Vector2 chunkPos;
+    private final List<Tile> tiles;
 
 
     public Chunk(float chunkX, float chunkY) {

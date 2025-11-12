@@ -2,9 +2,10 @@ package ch.bbcag.benjamin.Factorylibs.world.main.tileClasses;
 
 import ch.bbcag.benjamin.Factorylibs.world.main.Game.World.Camera;
 import ch.bbcag.benjamin.Factorylibs.world.main.Game.World.Chunk;
+import ch.bbcag.benjamin.Factorylibs.world.main.Game.World.Drawable;
 import ch.bbcag.benjamin.Factorylibs.world.main.Game.World.Tile;
 
-public class Background extends Tile {
+public class Background extends Tile implements Drawable {
     public Background(int x, int y, String internalPath, Chunk parentChunk) {
         super(x, y, internalPath, parentChunk);
     }

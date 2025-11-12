@@ -1,27 +1,40 @@
 package ch.bbcag.benjamin.Factorylibs.world.main.Game;
 
 import ch.bbcag.benjamin.Factorylibs.world.main.Game.Global.Variables;
+import ch.bbcag.benjamin.Factorylibs.world.main.Game.UI.UImain;
+import ch.bbcag.benjamin.Factorylibs.world.main.Game.World.Camera;
 import ch.bbcag.benjamin.Factorylibs.world.main.Game.World.World;
+import ch.bbcag.benjamin.Factorylibs.world.main.tileClasses.Forground;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.math.Vector2;
 
 public class HandleInput implements InputProcessor {
     public static final float CAMERASPEED = 1000f;
+    private World world;
+    private UImain ui;
+    private Camera camera;
 
-    public static void handlePollingInput(World world) {
+    public HandleInput(World world, UImain ui, Camera camera) {
+        this.world = world;
+        this.ui = ui;
+        this.camera = camera;
+    }
+
+    public void handlePollingInput() {
         if (Variables.currentScene.equals("MainScene")) {
             if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) {
-                world.getMainCamera().moveUp((float) (CAMERASPEED * Variables.deltatime * Variables.PREFERDHEIGHTMULTIPLIER));
+                camera.moveUp((float) (CAMERASPEED * Variables.deltatime * Variables.PREFERDHEIGHTMULTIPLIER));
             }
             if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-                world.getMainCamera().moveDown((float) (CAMERASPEED * Variables.deltatime * Variables.PREFERDHEIGHTMULTIPLIER));
+                camera.moveDown((float) (CAMERASPEED * Variables.deltatime * Variables.PREFERDHEIGHTMULTIPLIER));
             }
             if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-                world.getMainCamera().moveLeft((float) (CAMERASPEED * Variables.deltatime * Variables.PREFERDWIDTHMULTIPLIER));
+                camera.moveLeft((float) (CAMERASPEED * Variables.deltatime * Variables.PREFERDWIDTHMULTIPLIER));
             }
             if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-                world.getMainCamera().moveRight((float) (CAMERASPEED * Variables.deltatime * Variables.PREFERDWIDTHMULTIPLIER));
+                camera.moveRight((float) (CAMERASPEED * Variables.deltatime * Variables.PREFERDWIDTHMULTIPLIER));
             }
         }
     }
@@ -54,7 +67,9 @@ public class HandleInput implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        return false;
+        Vector2 clickpos = new Vector2(screenX, Gdx.graphics.getHeight() - screenY);
+        world.setTileFromWorldPosAndLayer(camera.getWorldPosFromCameraPos(clickpos));
+        return ui.click(clickpos);
     }
 
     @Override

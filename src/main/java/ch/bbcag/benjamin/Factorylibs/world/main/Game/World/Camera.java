@@ -18,7 +18,7 @@ public record Camera(Vector2 pos, int width, int height, SpriteBatch batch) {
     }
 
     public Vector2 getWorldPosFromCameraPos(Vector2 clickpos) {
-        return pos.add(clickpos);
+        return clickpos.sub(pos);
     }
 
 
@@ -37,5 +37,13 @@ public record Camera(Vector2 pos, int width, int height, SpriteBatch batch) {
     public void moveRight(float amount) {
         this.pos.x -= amount;
     }
-}
 
+    public void dispose() {
+        this.batch.dispose();
+    }
+
+    @Override
+    public String toString() {
+        return pos.toString() + width + height;
+    }
+}

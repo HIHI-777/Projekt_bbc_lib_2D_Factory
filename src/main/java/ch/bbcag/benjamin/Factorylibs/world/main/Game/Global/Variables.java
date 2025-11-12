@@ -12,11 +12,14 @@ public class Variables {
     public static final int PREFERDHEIGHT = 1080;
     public static final int PREFERDWIDTHMULTIPLIER = Gdx.graphics.getWidth() / PREFERDWIDTH;
     public static final int PREFERDHEIGHTMULTIPLIER = Gdx.graphics.getHeight() / PREFERDHEIGHT;
+    public static final String varsPath = "src/main/resources/World/GlobalVariables/vars.json";
     public static String currentScene;
+    public static String currentTileType;
+    public static String currentInternalTilePath;
+    public static int currentLayer;
     public static boolean isExitMenuOpen;
     public static long lasttime = System.nanoTime();
     public static double deltatime;
-    public static final String varsPath = "src/main/resources/World/GlobalVariables/vars.json";
 
     public static void updateDeltatime() {
         long currentime = System.nanoTime();

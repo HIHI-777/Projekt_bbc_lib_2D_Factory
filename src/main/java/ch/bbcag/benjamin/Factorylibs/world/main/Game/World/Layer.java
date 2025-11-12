@@ -1,13 +1,16 @@
 package ch.bbcag.benjamin.Factorylibs.world.main.Game.World;
 
 import ch.bbcag.benjamin.Factorylibs.help.Chunk.ChunkLoader;
+import ch.bbcag.benjamin.Factorylibs.help.Chunk.TileFactory;
+import ch.bbcag.benjamin.Factorylibs.world.main.Game.Global.Variables;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Layer {
+public class Layer implements Drawable {
     private final List<Chunk> chunks;
     private final int layer;
 
@@ -48,6 +51,7 @@ public class Layer {
         }
     }
 
+    @Override
     public void draw(Camera camera) {
         for (Chunk chunk : chunks) {
             if (chunk.isinsidecamera(camera)) {
@@ -64,6 +68,36 @@ public class Layer {
 
     public List<Chunk> getChunks() {
         return chunks;
+    }
+
+    public void setTileFromWorldpos(Vector2 worldpos){
+        Vector2 copyofWorldpos = new Vector2(worldpos);
+        copyofWorldpos.x = (float) Math.floor(copyofWorldpos.x / (Chunk.WIDTH * Tile.TILESIZE));
+        copyofWorldpos.y = (float) Math.floor(copyofWorldpos.y / (Chunk.HEIGHT * Tile.TILESIZE));
+        for (Chunk chunk : chunks){
+            if(chunk.getChunkX() == copyofWorldpos.x && chunk.getChunkY() == copyofWorldpos.y){
+                Vector2 tilepos;
+                if (copyofWorldpos.x >= 0 && copyofWorldpos.y >= 0) {
+                    tilepos = new Vector2((float) Math.floor((worldpos.x / Tile.TILESIZE) % Chunk.WIDTH), (float) Math.floor((worldpos.y / Tile.TILESIZE) % Chunk.HEIGHT));
+                } else if (copyofWorldpos.x < 0 && copyofWorldpos.y >= 0) {
+                    float x = (float) Math.floor(Chunk.WIDTH + (worldpos.x / Tile.TILESIZE) % Chunk.WIDTH);
+                    float y = (float) Math.floor((worldpos.y / Tile.TILESIZE) % Chunk.HEIGHT);
+                    tilepos = new Vector2(x, y);
+                } else if (copyofWorldpos.x >= 0 && copyofWorldpos.y < 0) {
+                    float x = (float) Math.floor((worldpos.x / Tile.TILESIZE) % Chunk.WIDTH);
+                    float y = (float) Math.floor(Chunk.HEIGHT + (worldpos.y / Tile.TILESIZE) % Chunk.HEIGHT);
+                    tilepos = new Vector2(x, y);
+                } else if (copyofWorldpos.x < 0 && copyofWorldpos.y < 0) {
+                    float x = (float) Math.floor(Chunk.WIDTH + (worldpos.x / Tile.TILESIZE) % Chunk.WIDTH);
+                    float y = (float) Math.floor(Chunk.HEIGHT + (worldpos.y / Tile.TILESIZE) % Chunk.HEIGHT);
+                    tilepos = new Vector2(x, y);
+                } else {
+                    throw new RuntimeException("Java is Broken");
+                }
+                Tile tile = TileFactory.createTile(Variables.currentTileType, (int) tilepos.x, (int) tilepos.y, Variables.currentInternalTilePath, chunk);
+                chunk.addTile(tile);
+            }
+        }
     }
 
     public int getLayer() {

@@ -1,18 +1,19 @@
 package ch.bbcag.benjamin.Factorylibs.world.main.Game.UI;
 
 import ch.bbcag.benjamin.Factorylibs.world.main.Game.Global.Variables;
+import ch.bbcag.benjamin.Factorylibs.world.main.Game.World.Camera;
+import ch.bbcag.benjamin.Factorylibs.world.main.Game.World.Drawable;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class Scene {
-    private Texture img;
+public abstract class Scene implements Drawable {
     protected boolean visable;
     protected List<Button> buttons;
+    private final Texture img;
 
     public Scene(String internalPath) {
         this.img = new Texture(internalPath);
@@ -24,10 +25,11 @@ public abstract class Scene {
         this.buttons.addAll(List.of(buttons));
     }
 
-    public void draw(SpriteBatch batch) {
-        batch.draw(img, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    @Override
+    public void draw(Camera camera) {
+        camera.batch().draw(img, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         for (Button button : buttons) {
-            button.draw(batch);
+            button.draw(camera);
         }
     }
 
