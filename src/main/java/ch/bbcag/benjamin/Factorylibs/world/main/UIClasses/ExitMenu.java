@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 public class ExitMenu extends Scene {
     public ExitMenu(String internalPath) {
         super(internalPath);
-        this.addButtons(new ExitButton(new Vector2(1570, 550)));
+        this.addButtons(new ExitButton(new Vector2(540, 550)));
     }
 
     @Override

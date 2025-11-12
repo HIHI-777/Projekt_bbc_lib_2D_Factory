@@ -1,7 +1,7 @@
 package ch.bbcag.benjamin.Factorylibs.world.main.Game.UI;
 
-import ch.bbcag.benjamin.Factorylibs.help.files.Filepaths;
 import ch.bbcag.benjamin.Factorylibs.world.main.Game.Global.Variables;
+import ch.bbcag.benjamin.Factorylibs.world.main.Game.World.Drawable;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Vector2;
 
-public class Font {
+public class Font implements Drawable {
     private Vector2 pos;
     private float width, height;
     private BitmapFont font;
@@ -21,6 +21,9 @@ public class Font {
     private int size;
 
     public Font(Vector2 pos, int size, Color color, String internalPath, String text) {
+        if (size < 3){
+            throw new IllegalArgumentException("Size cannot be less than 3. size: " + size);
+        }
         this.pos = pos;
         this.internalPath = internalPath;
         this.color = color;
@@ -42,8 +45,9 @@ public class Font {
         this.height = layout.height;
     }
 
+    @Override
     public void draw(SpriteBatch batch){
-        font.draw(batch, layout, pos.x, pos.y);
+        font.draw(batch, layout, pos.x, pos.y + this.height);
     }
 
     public void dispose(){
@@ -55,7 +59,7 @@ public class Font {
     }
 
     public void setCenterPos(Vector2 pos){
-        setPos(pos.sub(getWidth() / 2f, getHeight() / 2f));
+        this.pos = pos.sub(width / 2f, height / 2f);
     }
 
     public void setText(String text){

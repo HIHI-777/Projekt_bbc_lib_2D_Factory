@@ -38,3 +38,4 @@ public record Camera(Vector2 pos, int width, int height, SpriteBatch batch) {
         this.pos.x -= amount;
     }
 }
+
