@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'application'
 }
-
+mainClassName = 'ch.bbcag.benjamin.Factorylibs.DesktopLauncher'
 
 group = 'ch.bbcag'
 version = '1.0-SNAPSHOT'
@@ -29,4 +29,19 @@ test {
 
 application {
     mainClass = 'ch.bbcag.benjamin.Factorylibs.DesktopLauncher'
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': mainClassName
+        )
+    }
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+
+    // Ignore duplicate files (like META-INF/INDEX.LIST)
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }

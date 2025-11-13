@@ -24,9 +24,10 @@ public class ChunkLoader {
                     String className = tileEntry.getString("class");
                     int x = tileEntry.getInt("x");
                     int y = tileEntry.getInt("y");
+                    int rotation = tileEntry.getInt("rotation");
                     String internalPath = tileEntry.getString("internalPath");
 
-                    Tile tile = TileFactory.createTile(className, x, y, internalPath, chunk);
+                    Tile tile = TileFactory.createTile(className, x, y, rotation, internalPath, chunk);
                     chunk.addTile(tile);
                 }
             }
@@ -34,6 +35,7 @@ public class ChunkLoader {
             return chunk;
 
         } catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException("Failed to load chunk: " + path, e);
         }
     }

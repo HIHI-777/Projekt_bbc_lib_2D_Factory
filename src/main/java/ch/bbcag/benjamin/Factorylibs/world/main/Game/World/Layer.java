@@ -1,8 +1,6 @@
 package ch.bbcag.benjamin.Factorylibs.world.main.Game.World;
 
 import ch.bbcag.benjamin.Factorylibs.help.Chunk.ChunkLoader;
-import ch.bbcag.benjamin.Factorylibs.help.Chunk.TileFactory;
-import ch.bbcag.benjamin.Factorylibs.world.main.Game.Global.Variables;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Vector2;
@@ -15,11 +13,11 @@ public class Layer implements Drawable {
     private final List<Chunk> chunks;
     private final int layer;
 
-    public Layer(int layer) {
+    public Layer(int layer, String layerFolderPath) {
         chunks = new ArrayList<>();
         this.layer = layer;
 
-        loadChunksFromFolder("src/main/resources/World/layers/Layer" + layer);
+        loadChunksFromFolder(layerFolderPath + layer);
     }
 
 
@@ -67,24 +65,29 @@ public class Layer implements Drawable {
         }
     }
 
+    public void newChunkAtWorldPos(Vector2 worldpos){
+        chunks.add(new Chunk(Chunk.getChunkposFromWorldpos(worldpos)));
+    }
+
     public List<Chunk> getChunks() {
         return chunks;
     }
 
-    public void setTileFromWorldpos(Vector2 worldpos) {
-        Vector2 copyofWorldpos = new Vector2(worldpos);
-        copyofWorldpos.x = (float) Math.floor(copyofWorldpos.x / (Chunk.WIDTH * Tile.TILESIZE));
-        copyofWorldpos.y = (float) Math.floor(copyofWorldpos.y / (Chunk.HEIGHT * Tile.TILESIZE));
+    public boolean setTileFromWorldpos(Vector2 worldpos) {
+        Vector2 chunkpos = Chunk.getChunkposFromWorldpos(worldpos);
         for (Chunk chunk : chunks) {
-            if (chunk.getChunkX() == copyofWorldpos.x && chunk.getChunkY() == copyofWorldpos.y) {
-                Vector2 tilepos;
-                float x = (float) Math.floor((worldpos.x / Tile.TILESIZE) % Chunk.WIDTH);
-                if (copyofWorldpos.x < 0) x += Chunk.WIDTH;
-                float y = (float) Math.floor((worldpos.y / Tile.TILESIZE) % Chunk.HEIGHT);
-                if (copyofWorldpos.y < 0) y += Chunk.HEIGHT;
-                tilepos = new Vector2(x, y);
-                Tile tile = TileFactory.createTile(Variables.currentTileType, (int) tilepos.x, (int) tilepos.y, Variables.currentInternalTilePath, chunk);
-                chunk.addTile(tile);
+            if (chunk.replaceTileAtChunkposAndWorldpos(chunkpos, worldpos)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void deleteTileFromWorldpos(Vector2 worldpos) {
+        Vector2 chunkpos = Chunk.getChunkposFromWorldpos(worldpos);
+        for (Chunk chunk : chunks) {
+            if (chunk.DeleteTileAtChunkposAndWorldpos(chunkpos, worldpos)){
+                return;
             }
         }
     }

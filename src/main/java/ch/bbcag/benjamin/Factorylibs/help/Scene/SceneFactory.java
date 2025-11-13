@@ -3,7 +3,7 @@ package ch.bbcag.benjamin.Factorylibs.help.Scene;
 import ch.bbcag.benjamin.Factorylibs.world.main.Game.UI.Scene;
 
 public class SceneFactory {
-    private static final String SCENE_PACKAGE = "ch.bbcag.benjamin.Factorylibs.world.main.UIClasses.";
+    private static String SCENE_PACKAGE;
 
     public static Scene createScene(String className, String internalPath) {
         try {
@@ -23,5 +23,9 @@ public class SceneFactory {
         } catch (Exception e) {
             throw new RuntimeException("Failed to load Scene: " + SCENE_PACKAGE + className, e);
         }
+    }
+
+    public static void setScenePackage(String scenePackage) {
+        SCENE_PACKAGE = scenePackage;
     }
 }

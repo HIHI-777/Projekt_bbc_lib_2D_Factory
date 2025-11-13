@@ -1,5 +1,6 @@
 package ch.bbcag.benjamin.Factorylibs.world.main.Game.UI;
 
+import ch.bbcag.benjamin.Factorylibs.help.Scene.SceneFactory;
 import ch.bbcag.benjamin.Factorylibs.help.Scene.SceneLoader;
 import ch.bbcag.benjamin.Factorylibs.world.main.Game.Global.Variables;
 import ch.bbcag.benjamin.Factorylibs.world.main.Game.World.Camera;
@@ -11,12 +12,13 @@ import java.util.List;
 public class UImain implements Drawable {
     private final List<Scene> scenes;
 
-    public UImain() {
-        scenes = getScenes();
+    public UImain(String SceneFolderpath, String scenePackage) {
+        scenes = getScenes(SceneFolderpath);
+        SceneFactory.setScenePackage(scenePackage);
     }
 
-    public List<Scene> getScenes() {
-        return SceneLoader.loadScenesFromJson("src/main/resources/World/Scenes");
+    public List<Scene> getScenes(String SceneFolderpath) {
+        return SceneLoader.loadScenesFromJson(SceneFolderpath);
     }
 
     @Override
