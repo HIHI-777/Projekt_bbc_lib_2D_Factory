@@ -10,7 +10,7 @@ public abstract class TextButton extends Button {
 
     public TextButton(Vector2 pos, Texture img, String text, Color color, String internalPathFont) {
         super(pos, img);
-        font = new Font(new Vector2(pos.x, pos.y), 3, color, internalPathFont, text);
+        font = new Font(new Vector2(pos.x, pos.y), 10, color, internalPathFont, text);
         while ((!(font.getWidth() > 0.8f * img.getWidth())) && (!(font.getHeight() > 0.8f * img.getHeight()))) {
             font.setSize(font.getSize() + 1);
         }

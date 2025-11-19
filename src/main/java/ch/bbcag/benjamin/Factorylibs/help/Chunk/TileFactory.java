@@ -5,7 +5,7 @@ import ch.bbcag.benjamin.Factorylibs.world.main.Game.World.Tile;
 
 public class TileFactory {
 
-    private static String TILE_PACKAGE;
+    public static String TILE_PACKAGE;
 
     public static Tile createTile(String className, int x, int y, int rotation, String internalPath, Chunk parentChunk) {
         try {
