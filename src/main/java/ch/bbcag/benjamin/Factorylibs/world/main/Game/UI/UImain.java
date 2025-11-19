@@ -13,8 +13,8 @@ public class UImain implements Drawable {
     private final List<Scene> scenes;
 
     public UImain(String SceneFolderpath, String scenePackage) {
-        scenes = getScenes(SceneFolderpath);
         SceneFactory.setScenePackage(scenePackage);
+        scenes = getScenes(SceneFolderpath);
     }
 
     public List<Scene> getScenes(String SceneFolderpath) {

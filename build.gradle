@@ -2,20 +2,22 @@ plugins {
     id 'java'
     id 'application'
 }
-mainClassName = 'ch.bbcag.benjamin.Factorylibs.DesktopLauncher'
 
 group = 'ch.bbcag'
 version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
-    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+    maven {
+        url = uri("https://oss.sonatype.org/content/repositories/snapshots/")
+    }
 }
 
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
     implementation "com.badlogicgames.gdx:gdx:1.12.1"
     implementation "com.badlogicgames.gdx:gdx-freetype:1.12.1"
     implementation "com.badlogicgames.gdx:gdx-backend-lwjgl3:1.12.1"
@@ -28,20 +30,21 @@ test {
 }
 
 application {
-    mainClass = 'ch.bbcag.benjamin.Factorylibs.DesktopLauncher'
+    // This replaces mainClassName
+    mainClass = "ch.bbcag.benjamin.Factorylibs.DesktopLauncher"
 }
 
 jar {
     manifest {
         attributes(
-                'Main-Class': mainClassName
+            "Main-Class": "ch.bbcag.benjamin.Factorylibs.DesktopLauncher"
         )
     }
 
+    // Build a fat/uber JAR with all dependencies
     from {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 
-    // Ignore duplicate files (like META-INF/INDEX.LIST)
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }

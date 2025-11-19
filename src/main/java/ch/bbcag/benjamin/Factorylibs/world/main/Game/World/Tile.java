@@ -4,7 +4,7 @@ import ch.bbcag.benjamin.Factorylibs.world.main.Game.Global.Variables;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
-public abstract class Tile {
+public abstract class Tile implements Drawable{
     public static final int TILESIZE = 32 * Variables.PREFERDWIDTHMULTIPLIER;
     private final Texture img;
     private final Chunk parentChunk;
