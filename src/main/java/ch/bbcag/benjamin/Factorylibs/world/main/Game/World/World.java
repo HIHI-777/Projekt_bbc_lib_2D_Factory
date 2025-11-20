@@ -12,13 +12,15 @@ import java.util.List;
 
 public abstract class World implements Drawable {
     private List<Layer> layers;
+    private Background background;
 
 
-    public World(String pathname, String tilePackage, String varsPath, String layerFolderPath) {
+    public World(String pathname, String tilePackage, String varsPath, String layerFolderPath, String backgroundImgPath) {
         TileFactory.setTilePackage(tilePackage);
         Variables.setVarsPath(varsPath);
         Variables.getVars();
         layers = getLayers(pathname, layerFolderPath);
+        background = new Background(backgroundImgPath);
     }
 
     private List<Layer> getLayers(String pathname, String layerFolderPath) {
@@ -43,12 +45,14 @@ public abstract class World implements Drawable {
 
     @Override
     public void draw(Camera camera) {
+        background.draw(camera);
         for (Layer layer : layers) {
             layer.draw(camera);
         }
     }
 
     public void dispose() {
+        background.dispose();
         for (Layer layer : layers) {
             layer.dispose();
         }

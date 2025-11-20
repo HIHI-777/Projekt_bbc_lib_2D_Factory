@@ -61,8 +61,8 @@ public class Chunk implements Drawable {
         float chunkPixelWidth = Chunk.WIDTH * Tile.TILESIZE;
         float chunkPixelHeight = Chunk.HEIGHT * Tile.TILESIZE;
 
-        boolean xOverlap = chunkPixelX > camera.getX() || chunkPixelX + chunkPixelWidth < camera.getX() + camera.width();
-        boolean yOverlap = chunkPixelY > camera.getY() || chunkPixelY + chunkPixelHeight < camera.getY() + camera.height();
+        boolean xOverlap = chunkPixelX > camera.getX() || chunkPixelX + chunkPixelWidth < camera.getX() + camera.width;
+        boolean yOverlap = chunkPixelY > camera.getY() || chunkPixelY + chunkPixelHeight < camera.getY() + camera.height;
         return xOverlap && yOverlap;
     }
 

@@ -3,9 +3,17 @@ package ch.bbcag.benjamin.Factorylibs.world.main.Game.World;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
-public record Camera(Vector2 pos, int width, int height, SpriteBatch batch) {
+public class Camera {
+    public Vector2 pos;
+    public int width;
+    public int height;
+    public SpriteBatch batch;
+
     public Camera(float x, float y, int width, int height, SpriteBatch batch) {
-        this(new Vector2(x, y), width, height, batch);
+        this.pos = new Vector2(x, y);
+        this.width = width;
+        this.height = height;
+        this.batch = batch;
     }
 
     // getters and setters
@@ -19,6 +27,11 @@ public record Camera(Vector2 pos, int width, int height, SpriteBatch batch) {
 
     public Vector2 getWorldPosFromCameraPos(Vector2 clickpos) {
         return clickpos.sub(pos);
+    }
+
+    public void updateSize(int width, int height){
+        this.width = width;
+        this.height = height;
     }
 
 

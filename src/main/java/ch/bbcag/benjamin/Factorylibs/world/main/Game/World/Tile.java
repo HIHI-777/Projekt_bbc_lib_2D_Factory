@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 public abstract class Tile implements Drawable{
     public static final int TILESIZE = 32 * Variables.PREFERDWIDTHMULTIPLIER;
     private final Texture img;
-    private final Chunk parentChunk;
+    private transient final Chunk parentChunk;
     private final Vector2 pos;
     private int rotation;
 
@@ -43,7 +43,7 @@ public abstract class Tile implements Drawable{
         float x = ((this.parentChunk.getChunkX() * Chunk.WIDTH * TILESIZE) + this.pos.x * TILESIZE) + camera.getX();
         float y = ((this.parentChunk.getChunkY() * Chunk.HEIGHT * TILESIZE) + this.pos.y * TILESIZE) + camera.getY();
 
-        camera.batch().draw(
+        camera.batch.draw(
                 this.img,
                 x, y,                              // position (bottom-left)
                 TILESIZE / 2f, TILESIZE / 2f,      // origin (center of the tile)
@@ -62,11 +62,15 @@ public abstract class Tile implements Drawable{
 
     public static Vector2 getTileposFromChunkposAndWorldpos(Vector2 chunkpos, Vector2 worldpos){
         Vector2 tilepos;
-        float x = (float) Math.floor((worldpos.x / Tile.TILESIZE) % Chunk.WIDTH);
+        double x = Math.floor((worldpos.x / Tile.TILESIZE) % Chunk.WIDTH);
         if (chunkpos.x < 0) x += Chunk.WIDTH;
-        float y = (float) Math.floor((worldpos.y / Tile.TILESIZE) % Chunk.HEIGHT);
+        double y = Math.floor((worldpos.y / Tile.TILESIZE) % Chunk.HEIGHT);
         if (chunkpos.y < 0) y += Chunk.HEIGHT;
-        tilepos = new Vector2(x, y);
+        tilepos = new Vector2((float) x, (float) y);
         return tilepos;
+    }
+
+    public Chunk getParentChunk() {
+        return parentChunk;
     }
 }

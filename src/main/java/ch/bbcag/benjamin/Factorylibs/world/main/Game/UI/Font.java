@@ -47,7 +47,7 @@ public class Font implements Drawable {
 
     @Override
     public void draw(Camera camera) {
-        font.draw(camera.batch(), layout,
+        font.draw(camera.batch, layout,
                 Variables.PREFERDWIDTHMULTIPLIER * pos.x,
                 Variables.PREFERDWIDTHMULTIPLIER * pos.y + this.height);
     }

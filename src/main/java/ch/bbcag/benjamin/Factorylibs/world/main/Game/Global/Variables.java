@@ -11,8 +11,8 @@ import java.util.Arrays;
 public class Variables {
     public static final int PREFERDWIDTH = 1920;
     public static final int PREFERDHEIGHT = 1080;
-    public static final int PREFERDWIDTHMULTIPLIER = Gdx.graphics.getWidth() / PREFERDWIDTH;
-    public static final int PREFERDHEIGHTMULTIPLIER = Gdx.graphics.getHeight() / PREFERDHEIGHT;
+    public static int PREFERDWIDTHMULTIPLIER = Gdx.graphics.getWidth() / PREFERDWIDTH;
+    public static int PREFERDHEIGHTMULTIPLIER = Gdx.graphics.getHeight() / PREFERDHEIGHT;
     public static String varsPath;
     public static String currentScene;
     public static String currentTileType;
@@ -88,6 +88,9 @@ public class Variables {
             }
         }
 
+    }
+    public static void update(){
+        updateDeltatime();
     }
 
     public static void setVarsPath(String varsPath) {

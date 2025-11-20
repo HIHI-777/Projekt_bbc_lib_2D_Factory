@@ -19,7 +19,7 @@ public abstract class Button implements Drawable {
 
     @Override
     public void draw(Camera camera) {
-        camera.batch().draw(img,
+        camera.batch.draw(img,
                 (float) Variables.PREFERDWIDTHMULTIPLIER * pos.x,
                 (float) Variables.PREFERDHEIGHTMULTIPLIER * pos.y,
                 (float) Variables.PREFERDWIDTHMULTIPLIER * img.getWidth(),

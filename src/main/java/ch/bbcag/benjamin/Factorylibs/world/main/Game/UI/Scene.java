@@ -27,7 +27,7 @@ public abstract class Scene implements Drawable {
 
     @Override
     public void draw(Camera camera) {
-        camera.batch().draw(img, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        camera.batch.draw(img, 0, 0, Variables.PREFERDWIDTHMULTIPLIER * Variables.PREFERDWIDTH, Variables.PREFERDHEIGHT * Variables.PREFERDHEIGHTMULTIPLIER);
         for (Button button : buttons) {
             button.draw(camera);
         }

@@ -11,11 +11,38 @@ public abstract class TextButton extends Button {
     public TextButton(Vector2 pos, Texture img, String text, Color color, String internalPathFont) {
         super(pos, img);
         font = new Font(new Vector2(pos.x, pos.y), 10, color, internalPathFont, text);
-        while ((!(font.getWidth() > 0.8f * img.getWidth())) && (!(font.getHeight() > 0.8f * img.getHeight()))) {
-            font.setSize(font.getSize() + 1);
+
+        float maxW = img.getWidth() * 0.8f;
+        float maxH = img.getHeight() * 0.8f;
+
+        // Binary search range
+        int low = 10;
+        int high = 300; // or any reasonable max font size
+        int best = low;
+
+        while (low <= high) {
+            int mid = (low + high) / 2;
+
+            font.setSize(mid);
+            float w = font.getWidth();
+            float h = font.getHeight();
+
+            if (w <= maxW && h <= maxH) {
+                best = mid;      // this size works
+                low = mid + 1;   // try larger
+            } else {
+                high = mid - 1;  // too big
+            }
         }
-        font.setSize(font.getSize() - 1);
-        font.setCenterPos(new Vector2(pos.x + (img.getWidth() / 2f), pos.y + (img.getHeight() / 2f)));
+
+        // Set the final best size
+        font.setSize(best);
+
+        // Center it
+        font.setCenterPos(new Vector2(
+                pos.x + (img.getWidth() / 2f),
+                pos.y + (img.getHeight() / 2f)
+        ));
     }
 
 
