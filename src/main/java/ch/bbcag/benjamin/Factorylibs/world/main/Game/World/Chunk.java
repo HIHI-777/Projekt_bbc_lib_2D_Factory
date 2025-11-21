@@ -41,6 +41,13 @@ public class Chunk implements Drawable {
         tiles.removeIf(tile::isintheSameSpot);
         tiles.add(tile);
     }
+    public boolean setTile(Tile tile) {
+        try {
+            tiles.add(tile);
+            return true;
+        }catch (Exception ignored) {}
+        return false;
+    }
     public void deleteTile(Vector2 tilepos) {
         tiles.removeIf(tile -> tile.isintheSameSpot(tilepos));
     }
@@ -76,9 +83,19 @@ public class Chunk implements Drawable {
         if (this.chunkPos.equals(chunkpos)) {
             Vector2 tilepos = Tile.getTileposFromChunkposAndWorldpos(chunkpos, worldpos);
             Tile tile = TileFactory.createTile(Variables.currentTileType, (int) tilepos.x, (int) tilepos.y,
-                    Variables.currentRotation, Variables.currentInternalTilePath, this);
+                    Variables.currentRotation, Variables.currentInternalTilePath, this, Variables.currentData);
             replaceTile(tile);
             return true;
+        }
+        return false;
+    }
+
+    public boolean setTileAtChunkposAndWorldpos(Vector2 chunkpos , Vector2 worldpos){
+        if (this.chunkPos.equals(chunkpos)) {
+            Vector2 tilepos = Tile.getTileposFromChunkposAndWorldpos(chunkpos, worldpos);
+            Tile tile = TileFactory.createTile(Variables.currentTileType, (int) tilepos.x, (int) tilepos.y,
+                    Variables.currentRotation, Variables.currentInternalTilePath, this, Variables.currentData);
+            return setTile(tile);
         }
         return false;
     }

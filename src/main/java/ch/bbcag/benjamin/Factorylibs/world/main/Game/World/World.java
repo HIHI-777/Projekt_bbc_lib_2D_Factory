@@ -12,7 +12,7 @@ import java.util.List;
 
 public abstract class World implements Drawable {
     private List<Layer> layers;
-    private Background background;
+    private final Background background;
 
 
     public World(String pathname, String tilePackage, String varsPath, String layerFolderPath, String backgroundImgPath) {
@@ -58,11 +58,18 @@ public abstract class World implements Drawable {
         }
     }
 
-    public void setTileFromWorldPosUsingCurrentLayer(Vector2 worldPos) {
-        setTileFromWorldPosAndLayer(worldPos, Variables.currentLayer);
+    public void setTileFromWorldPosAndLayer(Vector2 worldPos, int layer) {
+        for (Layer layer1 : layers) {
+            if (layer1.getLayer() == layer) {
+                if (!layer1.setTileFromWorldpos(worldPos)){
+                    layer1.newChunkAtWorldPos(worldPos);
+                    layer1.setTileFromWorldpos(worldPos);
+                }
+            }
+        }
     }
 
-    public void setTileFromWorldPosAndLayer(Vector2 worldPos, int layer) {
+    public void setTileFromWorldPosAndLayerIfPossible(Vector2 worldPos, int layer) {
         for (Layer layer1 : layers) {
             if (layer1.getLayer() == layer) {
                 if (!layer1.setTileFromWorldpos(worldPos)){

@@ -25,6 +25,7 @@ public class Variables {
     public static int mouseX = -1_000;
     public static int mouseY = -1_000;
     public static boolean isPlacing;
+    public static JsonValue currentData;
 
 
     public static void updateDeltatime() {

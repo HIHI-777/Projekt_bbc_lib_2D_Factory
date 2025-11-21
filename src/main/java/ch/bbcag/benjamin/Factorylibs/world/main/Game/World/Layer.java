@@ -5,21 +5,19 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Vector2;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.awt.*;
+import java.util.*;
 import java.util.List;
 
 public class Layer implements Drawable {
-    private final List<Chunk> chunks;
+    private final Map<Point, Chunk> chunks = new HashMap<>();
     private final int layer;
 
     public Layer(int layer, String layerFolderPath) {
-        chunks = new ArrayList<>();
         this.layer = layer;
 
         loadChunksFromFolder(layerFolderPath + layer);
     }
-
 
     private void loadChunksFromFolder(String folderPath) {
         FileHandle folder = Gdx.files.internal(folderPath);
@@ -29,22 +27,28 @@ public class Layer implements Drawable {
             return;
         }
 
-        // Loop through all files in the folder
         for (FileHandle file : folder.list()) {
             if (file.extension().equals("json")) {
                 try {
                     Chunk chunk = ChunkLoader.loadChunkFromJson(file.path());
-                    for (Chunk c : chunks) {
-                        if (chunk.isintheSameSpot(c)) {
-                            throw new IllegalArgumentException(
-                                    "Chunks cannot overlap, please check for duplicates"
-                            );
-                        }
+
+                    int cx = (int) chunk.getChunkX();
+                    int cy = (int) chunk.getChunkY();
+
+                    Point key = new Point(cx, cy);
+
+                    // Check duplicates
+                    if (chunks.containsKey(key)) {
+                        throw new IllegalArgumentException(
+                                "Chunks cannot overlap at (" + cx + "," + cy + ")"
+                        );
                     }
-                    chunks.add(chunk);
+
+                    chunks.put(key, chunk);
+
                 } catch (Exception e) {
                     System.err.println("Failed to load chunk: " + file.name());
-                    System.err.println(Arrays.toString(e.getStackTrace()));
+                    e.printStackTrace();
                 }
             }
         }
@@ -52,7 +56,7 @@ public class Layer implements Drawable {
 
     @Override
     public void draw(Camera camera) {
-        for (Chunk chunk : chunks) {
+        for (Chunk chunk : chunks.values()) {
             if (chunk.isinsidecamera(camera)) {
                 chunk.draw(camera);
             }
@@ -60,37 +64,59 @@ public class Layer implements Drawable {
     }
 
     public void dispose() {
-        for (Chunk chunk : chunks) {
+        for (Chunk chunk : chunks.values()) {
             chunk.dispose();
         }
     }
 
-    public void newChunkAtWorldPos(Vector2 worldpos){
-        chunks.add(new Chunk(Chunk.getChunkposFromWorldpos(worldpos)));
+    public void newChunkAtWorldPos(Vector2 worldpos) {
+        Vector2 cp = Chunk.getChunkposFromWorldpos(worldpos);
+        Point key = new Point((int)cp.x, (int)cp.y);
+
+        if (!chunks.containsKey(key)) {
+            chunks.put(key, new Chunk(cp));
+        }
     }
 
-    public List<Chunk> getChunks() {
-        return chunks;
+
+
+    public Collection<Chunk> getChunks() {
+        return chunks.values();
+    }
+
+    public boolean replaceTileFromWorldpos(Vector2 worldpos) {
+        Vector2 cp = Chunk.getChunkposFromWorldpos(worldpos);
+        Point key = new Point((int)cp.x, (int)cp.y);
+
+        Chunk chunk = chunks.get(key);
+        if (chunk == null) return false;
+
+        return chunk.replaceTileAtChunkposAndWorldpos(cp, worldpos);
     }
 
     public boolean setTileFromWorldpos(Vector2 worldpos) {
-        Vector2 chunkpos = Chunk.getChunkposFromWorldpos(worldpos);
-        for (Chunk chunk : chunks) {
-            if (chunk.replaceTileAtChunkposAndWorldpos(chunkpos, worldpos)){
-                return true;
-            }
-        }
-        return false;
+        Vector2 cp = Chunk.getChunkposFromWorldpos(worldpos);
+        Point key = new Point((int)cp.x, (int)cp.y);
+
+        Chunk chunk = chunks.get(key);
+        if (chunk == null) return false;
+
+        return chunk.setTileAtChunkposAndWorldpos(cp, worldpos);
     }
 
+
+
     public void deleteTileFromWorldpos(Vector2 worldpos) {
-        Vector2 chunkpos = Chunk.getChunkposFromWorldpos(worldpos);
-        for (Chunk chunk : chunks) {
-            if (chunk.DeleteTileAtChunkposAndWorldpos(chunkpos, worldpos)){
-                return;
-            }
-        }
+        Vector2 cp = Chunk.getChunkposFromWorldpos(worldpos);
+        Point key = new Point((int)cp.x, (int)cp.y);
+
+        Chunk chunk = chunks.get(key);
+        if (chunk == null) return;
+
+        chunk.DeleteTileAtChunkposAndWorldpos(cp, worldpos);
     }
+
+
 
     public int getLayer() {
         return layer;
