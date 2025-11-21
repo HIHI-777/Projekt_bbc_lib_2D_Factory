@@ -26,14 +26,6 @@ public abstract class Tile implements Drawable{
         this.data = data;
     }
 
-    public boolean isintheSameSpot(Tile other) {
-        return this.pos.x == other.getX() && this.pos.y == other.getY();
-    }
-
-    public boolean isintheSameSpot(Vector2 otherpos) {
-        return this.pos.x == otherpos.x && this.pos.y == otherpos.y;
-    }
-
     public float getX() {
         return this.pos.x;
     }

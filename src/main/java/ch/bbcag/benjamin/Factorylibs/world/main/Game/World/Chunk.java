@@ -54,9 +54,21 @@ public class Chunk implements Drawable {
 
     public boolean setTile(Tile tile) {
         Point key = new Point((int) tile.getX(), (int) tile.getY());
+
+        // Don't allow replacing an existing tile
+        if (tiles.containsKey(key)) {
+            return false;  // tile already exists → do nothing
+        }
+
+        // Enforce chunk capacity
+        if (tiles.size() >= MAX_TILES) {
+            throw new IllegalStateException("Chunk full!");
+        }
+
         tiles.put(key, tile);
         return true;
     }
+
 
     public void deleteTile(Vector2 tilepos) {
         Point key = new Point((int) tilepos.x, (int) tilepos.y);
@@ -97,7 +109,8 @@ public class Chunk implements Drawable {
                 Variables.currentData
         );
 
-        return setTile(tile);
+        setTile(tile);
+        return true;
     }
 
     public void DeleteTileAtChunkposAndWorldpos(Vector2 chunkpos, Vector2 worldpos) {

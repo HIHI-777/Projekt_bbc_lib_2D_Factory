@@ -19,12 +19,10 @@ public class Variables {
     public static String currentInternalTilePath;
     public static int currentLayer;
     public static int currentRotation;
-    public static boolean isExitMenuOpen;
     public static long lasttime = System.nanoTime();
     public static double deltatime;
     public static int mouseX = -1_000;
     public static int mouseY = -1_000;
-    public static boolean isPlacing;
     public static JsonValue currentData;
 
 

@@ -7,7 +7,6 @@ import com.badlogic.gdx.math.Vector2;
 
 import java.awt.*;
 import java.util.*;
-import java.util.List;
 
 public class Layer implements Drawable {
     private final Map<Point, Chunk> chunks = new HashMap<>();

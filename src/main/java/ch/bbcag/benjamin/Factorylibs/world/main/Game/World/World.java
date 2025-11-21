@@ -58,10 +58,10 @@ public abstract class World implements Drawable {
         }
     }
 
-    public void setTileFromWorldPosAndLayer(Vector2 worldPos, int layer) {
+    public void replaceTileFromWorldPosAndLayer(Vector2 worldPos, int layer) {
         for (Layer layer1 : layers) {
             if (layer1.getLayer() == layer) {
-                if (!layer1.setTileFromWorldpos(worldPos)){
+                if (!layer1.replaceTileFromWorldpos(worldPos)){
                     layer1.newChunkAtWorldPos(worldPos);
                     layer1.setTileFromWorldpos(worldPos);
                 }
@@ -69,7 +69,7 @@ public abstract class World implements Drawable {
         }
     }
 
-    public void setTileFromWorldPosAndLayerIfPossible(Vector2 worldPos, int layer) {
+    public void setTileFromWorldPosAndLayer(Vector2 worldPos, int layer) {
         for (Layer layer1 : layers) {
             if (layer1.getLayer() == layer) {
                 if (!layer1.setTileFromWorldpos(worldPos)){
