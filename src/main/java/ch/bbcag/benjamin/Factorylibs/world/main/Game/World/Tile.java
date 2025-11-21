@@ -68,4 +68,8 @@ public abstract class Tile implements Drawable{
     public Chunk getParentChunk() {
         return parentChunk;
     }
+
+    public void save(){
+        data = null;
+    }
 }
