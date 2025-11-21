@@ -3,15 +3,17 @@ package ch.bbcag.benjamin.Factorylibs.world.main.Game.World;
 import ch.bbcag.benjamin.Factorylibs.world.main.Game.Global.Variables;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.JsonValue;
 
 public abstract class Tile implements Drawable{
     public static final int TILESIZE = 32 * Variables.PREFERDWIDTHMULTIPLIER;
-    private final Texture img;
-    private transient final Chunk parentChunk;
-    private final Vector2 pos;
-    private int rotation;
+    protected final Texture img;
+    protected transient final Chunk parentChunk;
+    protected final Vector2 pos;
+    protected final int rotation;
+    protected JsonValue data;
 
-    public Tile(float x, float y, int rotation, String internalPath, Chunk parentChunk) {
+    public Tile(float x, float y, int rotation, String internalPath, Chunk parentChunk, JsonValue data) {
         if (x < 0 || x > Chunk.WIDTH - 1 || y < 0 || y > Chunk.HEIGHT - 1) {
             throw new IllegalArgumentException(
                     "Tile coordinates out of range (must be 0-" + (Chunk.WIDTH - 1) + "): x=" + x + ", y=" + y
@@ -21,6 +23,7 @@ public abstract class Tile implements Drawable{
         this.rotation = rotation;
         this.img = new Texture(internalPath);
         this.parentChunk = parentChunk;
+        this.data = data;
     }
 
     public boolean isintheSameSpot(Tile other) {

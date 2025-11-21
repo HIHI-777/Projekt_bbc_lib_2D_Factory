@@ -26,8 +26,9 @@ public class ChunkLoader {
                     int y = tileEntry.getInt("y");
                     int rotation = tileEntry.getInt("rotation");
                     String internalPath = tileEntry.getString("internalPath");
+                    JsonValue data = tileEntry.get("data");
 
-                    Tile tile = TileFactory.createTile(className, x, y, rotation, internalPath, chunk);
+                    Tile tile = TileFactory.createTile(className, x, y, rotation, internalPath, chunk, data);
                     chunk.addTile(tile);
                 }
             }
